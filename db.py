@@ -18,6 +18,8 @@ class DB:
 
     def add(self, chat_id: str) -> bool:
         '''add new user'''
+        if chat_id in self.data:
+            return
         self.data[chat_id] = {
             "like": 0,
             "dislike": 0,

@@ -1,11 +1,9 @@
 import time
 from handlers import get_last_update, send_like_dislike, send_welcome_msg
+from db import DB
 
 
-like = 0
-dislike = 0
-
-
+db = DB()
 
 def main():
     last_update = get_last_update()
@@ -26,14 +24,15 @@ def main():
 
             if text == '/start':
                 send_welcome_msg(chat_id)
+                db.add(chat_id)
             elif text == '👍':
-                like += 1
-                send_like_dislike(chat_id, like, dislike)
+                data = db.increase_like(chat_id)
+                send_like_dislike(chat_id, data['like'], data['dislike'])
             elif text == '👎':
-                dislike += 1
-                send_like_dislike(chat_id, like, dislike)
+                db.increase_dislike(chat_id)
+                send_like_dislike(chat_id, data['like'], data['dislike'])
 
-            print(chat_id, text, like, dislike)
+
             last_update_id = current_update_id
             
         time.sleep(1)

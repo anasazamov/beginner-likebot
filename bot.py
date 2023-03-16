@@ -20,9 +20,17 @@ def main():
             chat_id = last_msg['chat']['id']
 
             text = last_msg.get('text')
+            print(text, chat_id)
+            
             if text == '/start':
                 send_welcome_msg(chat_id)
-
+            elif text == '👍':
+                global like
+                like += 1
+            elif text == '👎':
+                global dislike
+                dislike += 1
+            print(like, dislike)
             last_update_id = current_update_id
             
         time.sleep(1)

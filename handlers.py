@@ -34,7 +34,7 @@ def send_welcome_msg(chat_id: int) -> None:
         'reply_markup': keyborad
     }
     response = requests.get(url, json=payload)
-    print(response.status_code)
+
 
 def send_like_dislike(chat_id: int, like: int, dislike: int) -> None:
     '''send message to tg user about number of like and dislike'''

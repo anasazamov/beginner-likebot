@@ -16,12 +16,24 @@ def get_last_update() -> dict:
 def send_welcome_msg(chat_id: int) -> None:
     '''send welcome message'''
     url = f'{URL}sendMessage'
+    btn1 = {
+        'text': '👍'
+    }
+    btn2 = {
+        'text': '👎'
+    }
+    keyborad = {
+        'keyboard': [[btn1, btn2]],
+        'resize_keyboard': True
+    }
+
     payload = {
         'chat_id': chat_id,
         'text': '_*Welcome to our bot*_\n\n_press one of the buttons?_',
-        'parse_mode': 'MarkdownV2'
+        'parse_mode': 'MarkdownV2',
+        'reply_markup': keyborad
     }
-    response = requests.get(url, params=payload)
+    response = requests.get(url, json=payload)
     print(response.status_code)
 
 def send_like_dislike(chat_id: int, like: int, dislike: int) -> None:

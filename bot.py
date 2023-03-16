@@ -10,7 +10,7 @@ dislike = 0
 def main():
     last_update = get_last_update()
     last_update_id = last_update['update_id']
-
+    
     while True:
         current_update = get_last_update()
         current_update_id = current_update['update_id']
@@ -20,17 +20,20 @@ def main():
             chat_id = last_msg['chat']['id']
 
             text = last_msg.get('text')
-            print(text, chat_id)
             
+            global like
+            global dislike
+
             if text == '/start':
                 send_welcome_msg(chat_id)
             elif text == '👍':
-                global like
                 like += 1
+                send_like_dislike(chat_id, like, dislike)
             elif text == '👎':
-                global dislike
                 dislike += 1
-            print(like, dislike)
+                send_like_dislike(chat_id, like, dislike)
+
+            print(chat_id, text, like, dislike)
             last_update_id = current_update_id
             
         time.sleep(1)

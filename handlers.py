@@ -1,6 +1,6 @@
 import requests
 
-TOKEN = '5959656588:AAFRUBI1vozVI4ScI9HCVu3YRk2qd_6PjxQ'
+TOKEN = '6097521187:AAHbPqQPSlFP54uT-Sj6MdnJpeBB_5Idsmg'
 URL = f'https://api.telegram.org/bot{TOKEN}/'
 
 
@@ -38,4 +38,10 @@ def send_welcome_msg(chat_id: int) -> None:
 
 def send_like_dislike(chat_id: int, like: int, dislike: int) -> None:
     '''send message to tg user about number of like and dislike'''
-    pass
+    url = f'{URL}sendMessage'
+    payload = {
+        'chat_id': chat_id,
+        'text': f'*like: {like}\ndislike: {dislike}*',
+        'parse_mode': 'MarkdownV2'
+    }
+    response = requests.get(url, params=payload)

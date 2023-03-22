@@ -1,6 +1,6 @@
 import requests
 
-TOKEN = '6171872204:AAHFacuu3M8QMdtxlZsJUk_HNjEhVH3_LJQ'
+TOKEN = '6058623152:AAGNlIY67LiEiPIQAQl6S4puvE9mgSPHMjU'
 URL = f'https://api.telegram.org/bot{TOKEN}/'
 
 
@@ -13,7 +13,7 @@ def get_last_update() -> dict:
         return response.json()['result'][-1]
     return False
 
-def send_welcome_msg(chat_id: int) -> None:
+def send_welcome_msg(chat_id: int,User_name1,User_name2) -> None:
     '''send welcome message'''
     url = f'{URL}sendMessage'
     btn1 = {
@@ -29,7 +29,7 @@ def send_welcome_msg(chat_id: int) -> None:
 
     payload = {
         'chat_id': chat_id,
-        'text': '_*Welcome to our bot*_\n\n_press one of the buttons?_',
+        'text': f'_*Welcome to our bot {User_name1} {User_name2}*_\n\n_press one of the buttons?_',
         'parse_mode': 'MarkdownV2',
         'reply_markup': keyborad
     }
